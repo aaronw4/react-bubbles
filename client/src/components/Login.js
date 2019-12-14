@@ -30,8 +30,7 @@ class Login extends React.Component {
       })
       .catch(err => console.log(err.message))
   }
-  // make a post request to retrieve a token from the api
-  // when you have handled the token, navigate to the BubblePage route
+  
   render(){
     return (
       <>
