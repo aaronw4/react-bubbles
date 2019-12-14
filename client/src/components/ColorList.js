@@ -58,7 +58,7 @@ const ColorList = ({ colors, updateColors }) => {
   return (
     <div className="colors-wrap">
       <p>new color</p>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className='topForm'>
       <label>
             color name:
             <input
@@ -81,6 +81,7 @@ const ColorList = ({ colors, updateColors }) => {
             />
           </label>
           <button className='button'>Submit</button>
+          <button></button>
       </form>
       <p>colors</p>
       <ul>
