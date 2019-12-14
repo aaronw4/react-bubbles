@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import {axiosWithAuth} from "./axiosWithAuth";
 
 const initialColor = {
   color: "",
@@ -10,6 +10,7 @@ const ColorList = ({ colors, updateColors }) => {
   console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
+  console.log(colorToEdit)
 
   const editColor = color => {
     setEditing(true);
@@ -18,17 +19,71 @@ const ColorList = ({ colors, updateColors }) => {
 
   const saveEdit = e => {
     e.preventDefault();
-    // Make a put request to save your updated color
-    // think about where will you get the id from...
-    // where is is saved right now?
+
+    axiosWithAuth()
+      .put(`/api/colors/${colorToEdit.id}`, {
+        code: colorToEdit.code,
+        color: colorToEdit.color,
+        id: colorToEdit.id
+      })
+      .then(
+        window.location.replace('/protected')
+      )
+      .catch(err => console.log(err));
   };
 
   const deleteColor = color => {
-    // make a delete request to delete this color
+    axiosWithAuth()
+      .delete(`/api/colors/${color.id}`)
+      .then(
+        window.location.replace('protected')
+      )
+      .catch(err => console.log(err));
   };
+  
+  const handleSubmit = e => {
+    e.preventDefault();
+
+    axiosWithAuth()
+      .post('/api/colors', {
+        code: colorToEdit.code,
+        color: colorToEdit.color,
+        id: colors.length
+      })
+      .then(
+        window.location.replace('/protected')
+      )
+  }
 
   return (
     <div className="colors-wrap">
+      <p className='title'>new color</p>
+      <a href='https://www.color-hex.com/' target='_blank' className='link'>(link to color hex codes)</a>
+      <form onSubmit={handleSubmit} className='topForm'>
+      <label>
+            color name:
+            <input
+              onChange={e =>
+                setColorToEdit({ ...colorToEdit, color: e.target.value })
+              }
+              value={colorToEdit.color}
+            />
+          </label>
+          <label>
+            hex code:
+            <input
+              onChange={e =>
+                setColorToEdit({
+                  ...colorToEdit,
+                  code: { hex: e.target.value }
+                })
+              }
+              value={colorToEdit.code.hex}
+            />
+          </label>
+          <button className='button'>Submit</button>
+          <button></button>
+      </form>
       <p>colors</p>
       <ul>
         {colors.map(color => (
@@ -81,7 +136,6 @@ const ColorList = ({ colors, updateColors }) => {
         </form>
       )}
       <div className="spacer" />
-      {/* stretch - build another form here to add a color */}
     </div>
   );
 };

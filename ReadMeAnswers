@@ -1,0 +1,21 @@
+- [ ] Explain what a token is used for.
+
+A token is like a key or password.
+It only allows access to a database if you have the correct token.
+
+- [ ] What steps can you take in your web apps to keep your data secure?
+
+You can create a log in page that retrieves a token.
+You can then create a Private Route that only gives access if the token is correct.
+
+- [ ] Describe how web servers work.
+
+Web servers dispense the web pages that are requested.
+Requests are sent out and data is sent back.
+Web servers handle these requests.
+
+- [ ] Which HTTP methods can be mapped to the CRUD acronym that we use when interfacing with APIs/Servers.
+ Create: post
+ Read: get
+ Update: put
+ Delete: delete
