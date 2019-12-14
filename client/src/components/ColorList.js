@@ -57,7 +57,8 @@ const ColorList = ({ colors, updateColors }) => {
 
   return (
     <div className="colors-wrap">
-      <p>new color</p>
+      <p className='title'>new color</p>
+      <a href='https://www.color-hex.com/' target='_blank' className='link'>(link to color hex codes)</a>
       <form onSubmit={handleSubmit} className='topForm'>
       <label>
             color name:
